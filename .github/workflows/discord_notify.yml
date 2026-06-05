@@ -1,12 +1,8 @@
-name: Discord Release Notify
+name: Notify Discord about new/updated release
 
 on:
   release:
-    types: [published]
-  # Note: GitHub Actions does not have a direct 'transferred' trigger for workflows 
-  # running inside the repo being transferred, as the workflow moves with the repo.
-  # Transfers are usually best monitored by an external service or organization owner.
-
+    types: [published, edited]
 jobs:
   notify:
     runs-on: ubuntu-latest
@@ -17,6 +13,6 @@ jobs:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           color: "5814783"
           username: "GitHub Releases"
-          content: "||@everyone||" # Optional: Remove this line if you don't want to ping everyone
+          content: "||@everyone||"
           footer_title: "Released by ${{ github.actor }}"
           reduce_headings: true
